@@ -28,7 +28,6 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Developervkindia\\ModuleGenerator\\": "packages/developervkindia/module-generator/src/"
         }
     },
     "autoload-dev": {

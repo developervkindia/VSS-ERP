@@ -54,6 +54,7 @@ class HandleGitWorkflow extends Command
         $this->runGitCommand(['push', 'origin', $currentBranch]);
         $this->info("Changes have been pushed to branch: $currentBranch");
 
+        // Hold it
         // Merge the current branch into master
         $this->runGitCommand(['checkout', 'master']);
         $this->info("Switched to master branch.");

@@ -4,46 +4,50 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
     // Show list of records
     public function index()
     {
-        $records = Project::all();
-        return view('Projects.index', compact('records'));
+        $projects = Project::all();
+
+        return view('projects.index', compact('projects'));
     }
 
     // Show create form
     public function create()
     {
-        return view('Projects.create');
+        return view('projects.create');
     }
 
     // Store a new record
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'title' => 'required',
             'description' => 'nullable',
         ]);
 
+        $request['user_id'] = Auth::id();
         Project::create($request->all());
-        return redirect()->route('Projects.index');
+
+        return redirect()->route('projects.index');
     }
 
     // Show edit form
     public function edit($id)
     {
         $record = Project::find($id);
-        return view('Projects.edit', compact('record'));
+        return view('projects.edit', compact('record'));
     }
 
     // Update a record
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
+            'title' => 'required',
             'description' => 'nullable',
         ]);
 

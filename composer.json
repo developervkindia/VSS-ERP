@@ -14,6 +14,7 @@
         "laravel/tinker": "^2.9"
     },
     "require-dev": {
+        "developervkindia/module-generator": "dev-main",
         "fakerphp/faker": "^1.23",
         "laravel/breeze": "^2.3",
         "laravel/pail": "^1.1",
@@ -70,6 +71,12 @@
             "php-http/discovery": true
         }
     },
+    "repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/developervkindia/module-generator.git"
+    }
+],
     "minimum-stability": "stable",
     "prefer-stable": true
 }

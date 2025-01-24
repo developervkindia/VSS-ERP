@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
-    // Show list of records
+    // Show list of projects
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::latest()->get();
 
         return view('projects.index', compact('projects'));
     }
@@ -22,11 +22,13 @@ class ProjectController extends Controller
         return view('projects.create');
     }
 
-    // Store a new record
+    // Store a new project
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
+            'title'       => 'required',
+            'start_date'  => 'nullable|date',
+            'end_date'    => 'nullable|date|after_or_equal:start_date',
             'description' => 'nullable',
         ]);
 
@@ -39,30 +41,33 @@ class ProjectController extends Controller
     // Show edit form
     public function edit($id)
     {
-        $record = Project::find($id);
-        return view('projects.edit', compact('record'));
+        $project = Project::find($id);
+
+        return view('projects.create', compact('project'));
     }
 
-    // Update a record
+    // Update a project
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required',
+            'title'       => 'required',
+            'start_date'  => 'nullable|date',
+            'end_date'    => 'nullable|date|after_or_equal:start_date',
             'description' => 'nullable',
         ]);
 
-        $record = Project::find($id);
-        $record->update($request->all());
+        $project = Project::find($id);
+        $project->update($request->all());
 
-        return redirect()->route('Projects.index');
+        return redirect()->route('projects.index');
     }
 
-    // Delete a record
+    // Delete a project
     public function destroy($id)
     {
-        $record = Project::find($id);
-        $record->delete();
+        $project = Project::find($id);
+        $project->delete();
 
-        return redirect()->route('Projects.index');
+        return redirect()->route('projects.index');
     }
 }

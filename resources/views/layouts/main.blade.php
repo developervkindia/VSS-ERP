@@ -11,6 +11,11 @@
 
         <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" />
 
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
+
+        {{-- <link rel="stylesheet" href="{{ asset('assets/plugins/simple-calendar/simple-calendar.css" ') }}"/> --}}
+        {{-- <link rel="stylesheet" href="{{ asset('assets/plugins/fullcalendar/fullcalendar.min.css') }}"> --}}
+
         <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
         
         <link rel="stylesheet" href="{{ asset('assets/plugins/feather/feather.css') }}" />
@@ -45,6 +50,12 @@
 
         <script src="{{ asset('assets/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 
+        <script src="{{ asset('assets/js/moment.min.js') }}"></script>
+        <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
+
+        {{-- <script src="{{ asset('assets/plugins/fullcalendar/fullcalendar.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/fullcalendar/jquery.fullcalendar.js') }}"></script> --}}
+
         <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
         
         <script src="{{ asset('assets/js/feather.min.js') }}"></script>
@@ -54,5 +65,47 @@
         <script src="{{ asset('assets/plugins/datatables/datatables.min.js') }}"></script>
 
         <script src="{{ asset('assets/js/script.js') }}"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <script>
+            $('.confirm-delete').on('click', function() {
+                var href = $(this).data('href');
+                var name = $(this).data('name');
+                var type = $(this).data('type');
+                var msg = "Once deleted, you will not recover this "+name+".";
+
+                swal({
+                    title: "Are you sure?",
+                    text: msg,
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        console.log('dsdsa');
+
+                        $.ajax({
+                            type: "POST",
+                            url: href,
+                            data: {
+                                _method: 'DELETE',
+                                _token: "{{ csrf_token() }}"
+                            },
+                            success: function (response) {
+                                swal("Success!", name + " has been deleted.", "success").then(() => {
+                                    location.reload();
+                                });
+                            },
+                            error: function (xhr) {
+                                swal("Error!", "Something went wrong. Please try again.", "error");
+                            }
+                        })
+                    }
+                });
+            });
+        </script>
+
+        @stack('push_scripts')
     </body>
 </html>

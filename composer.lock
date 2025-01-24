@@ -6444,16 +6444,16 @@
         },
         {
             "name": "nunomaduro/collision",
-            "version": "v8.6.0",
+            "version": "v8.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/collision.git",
-                "reference": "a94c0fb8f33da6a113cdc0eac936f7c42134de9d"
+                "reference": "86f003c132143d5a2ab214e19933946409e0cae7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/a94c0fb8f33da6a113cdc0eac936f7c42134de9d",
-                "reference": "a94c0fb8f33da6a113cdc0eac936f7c42134de9d",
+                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/86f003c132143d5a2ab214e19933946409e0cae7",
+                "reference": "86f003c132143d5a2ab214e19933946409e0cae7",
                 "shasum": ""
             },
             "require": {
@@ -6474,7 +6474,7 @@
                 "laravel/sanctum": "^4.0.7",
                 "laravel/tinker": "^2.10.0",
                 "orchestra/testbench-core": "^9.9.2",
-                "pestphp/pest": "^2.36.0 || ^3.7.2",
+                "pestphp/pest": "^3.7.3",
                 "sebastian/environment": "^6.1.0 || ^7.2.0"
             },
             "type": "library",
@@ -6512,6 +6512,7 @@
                 "cli",
                 "command-line",
                 "console",
+                "dev",
                 "error",
                 "handling",
                 "laravel",
@@ -8184,14 +8185,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "developervkindia/module-generator": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }

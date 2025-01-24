@@ -24,7 +24,7 @@
                                 <h3 class="page-title">Project</h3>
                             </div>
                             <div class="col-auto text-end float-end ms-auto download-grp">
-                                <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a>
+                                {{-- <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a> --}}
                                 <a href="{{ route('projects.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                             </div>
                         </div>
@@ -50,7 +50,16 @@
                                     <td>{{ $project->start_date }}</td>
                                     <td>{{ $project->end_date }}</td>
                                     <td>{!! \Str::limit($project->description, 50) !!}</td>
-                                    <td></td>
+                                    <td>
+                                        <div class="">
+                                            <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-sm bg-danger-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                                <i class="feather-edit"></i>
+                                            </a>
+                                            <a href="javascript:void(0)" data-href="{{ route('projects.destroy', $project->id) }}" class="btn btn-sm bg-danger-light confirm-delete" data-name="Project" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                <i class="feather-trash-2"></i>
+                                            </a>
+                                        </div>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

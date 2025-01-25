@@ -1,3 +1,3 @@
 <footer>
-    <p>Copyright © 2022 Dreamguys.</p>
+    <p>© 2025 VSS-ERP All rights reserved.</p>
 </footer>

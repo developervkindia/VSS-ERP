@@ -28,7 +28,7 @@
                                 <h5 class="form-title"><span>User Information</span></h5>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group local-forms">
                                     <label>Name</label>
                                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter name" value="{{ old('name', $user->name ?? '') }}" />
                                     @error('name')
@@ -37,16 +37,16 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="text" id="email" class="form-control datetimepicker @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email ?? '') }}" placeholder="Enter email"/>
+                                <div class="form-group local-forms">
+                                    <label for="email">Email <span class="login-danger">*</span></label>
+                                    <input type="text" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email ?? '') }}" placeholder="Enter email"/>
                                     @error('email')
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group local-forms">
                                     <label>Role of User</label>
                                     <select class="form-control" id="role" name="role" required>
                                         @foreach ($roles as $role)

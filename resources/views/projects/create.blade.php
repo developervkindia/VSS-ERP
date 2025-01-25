@@ -5,10 +5,9 @@
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col">
-                <h3 class="page-title">Project</h3>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Project</li>
+                    <li class="breadcrumb-item active">Projessct</li>
                 </ul>
             </div>
         </div>
@@ -28,7 +27,7 @@
                                 <h5 class="form-title"><span>Project Information</span></h5>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group local-forms">
                                     <label>Project Title</label>
                                     <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" placeholder="Enter project title" value="{{ old('title', $project->title ?? '') }}" />
                                     @error('title')
@@ -37,7 +36,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group local-forms">
                                     <label>Type of Project</label>
                                     @php
                                         $projecTypes = ['public', 'private'];
@@ -54,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <div class="form-group">
+                                <div class="form-group local-forms">
                                     <label for="start_date">Start Date</label>
                                     <input type="text" id="start_date" class="form-control datetimepicker @error('start_date') is-invalid @enderror" name="start_date" value="{{ old('start_date', $project->start_date ?? '') }}" />
                                     @error('start_date')
@@ -63,7 +62,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <div class="form-group">
+                                <div class="form-group local-forms">
                                     <label for="end_date">End Date</label>
                                     <input type="text" id="end_date" class="form-control datetimepicker @error('end_date') is-invalid @enderror" name="end_date" value="{{ old('end_date', $project->end_date ?? '') }}" />
                                     @error('end_date')
@@ -72,7 +71,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12">
-                                <div class="form-group">
+                                <div class="form-group local-forms">
                                     <label>Description</label>
                                     <textarea name="description" id="editor" cols="30" rows="10">{{ old('description', $project->description ?? '') }}</textarea>
                                     @error('description')

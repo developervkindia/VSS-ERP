@@ -1,0 +1,180 @@
+body{ 
+    font-family: 'Poppins', sans-serif;
+    
+
+    font-size: 2rem;
+    color:black;
+}
+
+.container{
+    max-width: 1200px;
+}
+.logo {
+    color:white;
+
+}
+
+.icons{
+    
+}
+
+.bi{
+    margin: 5px;
+    color: white;
+    margin-top: 17px;
+}
+
+.image{
+    color: white;
+}
+.navbar-expand-lg .navbar-collapse {
+ 
+     font-weight: 700;
+    font-size: 25px;
+    color: white;
+    
+}
+
+.id-navbarNav{
+    margin-left: auto;
+}
+
+.image-logo{
+    color: white;
+    margin-left: 200px;
+}
+
+
+
+.nav-link{ 
+    color: white;
+
+}
+
+.nav-item{
+margin-left: auto;
+}
+
+.col-2{
+    color: black;
+}
+
+.sub-heading{
+    font-size: 24px;
+    line-height: 2;
+    font-weight: 700;
+    color:  #6c63ff;;
+}
+
+.titel-style{
+    font-size: 48px;
+    line-height: 1.25;
+    font-weight: 700;
+    color: #222222;
+}
+
+.about-image{
+    margin-left: -350px;
+}
+.subtitle-style{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: #666666;
+}
+.link-style{
+    
+    color: #222222;
+    
+}
+.service-img{
+    margin-top: -100px;
+}
+
+.service-image{
+    border-radius: 50%;
+    background-color: rgb(243, 249, 251);
+    margin-top: 35px;
+}
+
+.icons-style{
+    color: #6c63ff;
+}
+.service-card{
+
+}
+.service-icon{
+    background-color: #6c63ff;
+    padding: 10px;
+    width: 60px;
+    height:60px ;
+    border-radius: 50%;
+    margin: 4px;
+    padding-top: inherit;
+}
+
+.full-width-section{
+    background-color: rgb(243, 249, 251) ;
+}
+.why-style{
+    
+}
+.Why-Choose-img{
+    margin-left: -130px;
+}
+.mycard{
+    border-bottom: 3px solid #6c63ff;
+}
+.feature-icon {
+    width: 60px;
+    border-radius: 50%;
+    background-color: #6c63ff;
+    height: 60px;
+    text-align: center;
+    margin: 10px;
+    
+
+}
+.totop{
+    padding: 12px 15px;
+    background-color: #6c63ff;
+    color: white;
+    border-radius: 5px;
+    position: sticky;
+    bottom: 20px;
+    float: right;
+    right: 10px;
+}
+.blog-link{
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 700;
+    
+    line-height: 1.2;
+}
+.blog-card img{
+    transition: all .4s ease-in-out;
+}
+
+.blog-card:hover img {
+    transform: scale(1.1)rotate(-5deg);
+}
+.mycard{
+    transition: all 0.4s;
+}
+
+.mycard:hover{
+    margin-top: -20px;
+}
+.service-icon{
+    transition: all 0.4s;
+}
+.service-card:hover .service-icon{
+    margin-left: 30px;
+}
+.feature-icon{
+    transition: all 0.4s;
+}
+.feature-card:hover .feature-icon{
+    margin-left: 30px;
+}

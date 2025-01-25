@@ -28,21 +28,20 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|exists:roles,name',
+            'name'  => 'required',
+            'email' => 'required|email|unique:users,email',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+        // Set default password if not provided
+        $password = $request->password ?? '12345678';
 
-        $user->assignRole($request->role);
+        $userData = $request->all();
+        $userData['password'] = bcrypt($password);
+        $userData['user_id'] = Auth::id();
 
-        return redirect()->route('users.index')->with('success', 'User created successfully with role.');
+        User::create($userData);
+
+        return redirect()->route('users.index');
     }
 
     // Show edit form

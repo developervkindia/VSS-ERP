@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
-        <title>Preskool - Holiday</title>
+        <title>VSS-ERP</title>
 
         <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" />
 
@@ -17,7 +17,7 @@
         {{-- <link rel="stylesheet" href="{{ asset('assets/plugins/fullcalendar/fullcalendar.min.css') }}"> --}}
 
         <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
-        
+
         <link rel="stylesheet" href="{{ asset('assets/plugins/feather/feather.css') }}" />
 
         <link rel="stylesheet" href="{{ asset('assets/css/ckeditor.css') }}">
@@ -57,7 +57,7 @@
         <script src="{{ asset('assets/plugins/fullcalendar/jquery.fullcalendar.js') }}"></script> --}}
 
         <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
-        
+
         <script src="{{ asset('assets/js/feather.min.js') }}"></script>
 
         <script src="{{ asset('assets/js/ckeditor.js') }}"></script>

@@ -1,11 +1,47 @@
 <div class="header">
     <div class="header-left">
         <a href="index.html" class="logo">
-            <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" />
+            <img src="{{ asset('assets/img/logo1.jpeg') }}" alt="Logo" style="max-height: 40px;
+            width: 100%;
+            aspect-ratio: 5;
+            object-fit: cover;" />
         </a>
         <a href="index.html" class="logo logo-small">
-            <img src="{{ asset('assets/img/logo-small.png') }}" alt="Logo" width="30" height="30" />
+            <img src="{{ asset('assets/img/logo-small1.jpeg') }}" alt="Logo"  />
         </a>
+        {{-- <div class="text-primary h1"  style="margin:-9%"><img src="{{ asset('assets/img/logo.png') }}" alt="Logo" width="100%" height="inherit" /></div> --}}
+        {{-- <a href="index.html" class="logo"><h1 style="
+            font-family: 'Arial', sans-serif;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #007BFF; /* Primary blue */
+            text-shadow: 1px 7px 5px rgba(7, 0, 259, 0.4);
+            /* letter-spacing: 2px; */
+            display: inline-block;
+            /* padding: 0.5rem 1rem; */
+            /* border: 2px solid #007BFF; */
+            border-radius: 10px;
+            /* background: linear-gradient(90deg, #0056b3, #007BFF); */
+            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.4);">
+            VSS-ERP
+        </h1></a>
+        <a href="index.html" class="logo logo-small">
+            <h1 style="
+            font-family: 'Arial', sans-serif;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #007BFF; /* Primary blue */
+            text-shadow: 1px 7px 5px rgba(7, 0, 259, 0.4);
+            /* letter-spacing: 2px; */
+            display: inline-block;
+            /* padding: 0.5rem 1rem; */
+            /* border: 2px solid #007BFF; */
+            border-radius: 10px;
+            /* background: linear-gradient(90deg, #0056b3, #007BFF); */
+            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.4);">
+            V
+        </h1>
+        </a> --}}
     </div>
 
     <div class="menu-toggle">
@@ -136,7 +172,11 @@
                 </div>
                 <a class="dropdown-item" href="profile.html">My Profile</a>
                 <a class="dropdown-item" href="inbox.html">Inbox</a>
-                <a class="dropdown-item" href="login.html">Logout</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="dropdown-item" type="submit">Logout</button>
+
+                </form>
             </div>
         </li>
     </ul>

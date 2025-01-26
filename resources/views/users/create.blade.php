@@ -50,7 +50,10 @@
                                     <label>Role of User</label>
                                     <select class="form-control" id="role" name="role" required>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->name }}" {{ old('role', $role->name ?? '') ? 'selected' : '' }}>{{ ucwords($role->name) }}</option>
+                                        <option value="{{ $role->name }}"
+                                            {{ old('role', $user->getRoleNames()->first() ?? '') === $role->name ? 'selected' : '' }}>
+                                            {{ ucwords($role->name) }}
+                                        </option>
                                         @endforeach
                                     </select>
                                     @error('type')

@@ -17,7 +17,7 @@
   <body>
 
     <div>
-      <img class="image0" src="{{ asset('assets/images/home2-slider-img.jpg') }}" alt="">
+      <img class="image0" src="{{ asset('assets/images/dashboard2-slider-img.jpg') }}" alt="">
 
       <!-- Navbar start -->
       <nav class="navbar fixed-top navbar-expand-lg">
@@ -39,7 +39,7 @@
           <div class="collapse navbar-collapse m-auto nb-2 mb-lg-0" id="navbarNav">
             <ul class="navbar-nav mx-auto">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Home</a>
+                <a class="nav-link" aria-current="page" href="#">Dashboard</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">About</a>
@@ -99,7 +99,7 @@
             </div>
             <div class="col-2">
               <span class="f-600 text-white d-block mb-45">
-                <img src="{{ asset('assets/images/home2-slider-icon.png')}}" alt="">
+                <img src="{{ asset('assets/images/dashboard2-slider-icon.png')}}" alt="">
               </span>
             </div>
             <div class="col-5"></div>

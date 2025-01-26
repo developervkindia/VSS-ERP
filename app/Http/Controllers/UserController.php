@@ -5,15 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Role;
 
-class UserController extends Controller
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+
+class UserController extends Controller implements HasMiddleware
 {
+    public static function middleware() {
+        return [
+            new Middleware('permission:show-users', ['only' => ['index', 'show']]),
+            new Middleware('permission:create-users', ['only' => ['create', 'store']]),
+            new Middleware('permission:update-users', ['only' => ['edit', 'update']]),
+            new Middleware('permission:destroy-users', ['only' => ['destroy']]),
+        ];
+    }
+
     // Show list of users
     public function index()
     {
         $users = User::with('roles')->get();
-// dd($users);
         return view('users.index', compact('users'));
     }
 
@@ -48,23 +60,25 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-
-        return view('users.create', compact('user'));
+        $roles = Role::all();
+        $hasRole = $user->roles->pluck('id');
+        return view('users.create', compact('user', 'roles', 'hasRole'));
     }
 
     // Update a user
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title'       => 'required',
-            'start_date'  => 'nullable|date',
-            'end_date'    => 'nullable|date|after_or_equal:start_date',
-            'description' => 'nullable',
+            'name'  => 'required',
+            'email' => 'required|email|unique:users,email,' . $id.',id',
         ]);
 
         $user = User::find($id);
         $user->update($request->all());
 
+        if (isset($request->role)) {
+            $user->syncRoles($request->role);
+        }
         return redirect()->route('users.index');
     }
 

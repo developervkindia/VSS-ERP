@@ -16,11 +16,19 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // Create permissions
         $permissions = [
-            'view users',
-            'manage users',
-            'view projects',
-            'manage projects',
+            // User permissions
+            'show-users',       // show a single user
+            'create-users',     // Create new users
+            'update-users',     // Update existing users
+            'destroy-users',    // Delete users
+
+            // Project permissions
+            'show-projects',    // show a single project
+            'create-projects',  // Create new projects
+            'update-projects',  // Update existing projects
+            'destroy-projects', // Delete projects
         ];
+
 
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
@@ -31,13 +39,18 @@ class RolesAndPermissionsSeeder extends Seeder
         $admin->givePermissionTo(Permission::all()); // All permissions
 
         $hr = Role::create(['name' => 'HR']);
-        $hr->givePermissionTo(['view users', 'manage users']); // Permissions related to users
+        $hr->givePermissionTo([
+            'show-users', 'create-users', 'update-users', 'destroy-users'
+        ]); // Full user management permissions
 
         $manager = Role::create(['name' => 'Manager']);
-        $manager->givePermissionTo(['view users', 'view projects', 'manage projects']); // Full projects access, view users
+        $manager->givePermissionTo([
+            'show-users',
+            'show-projects', 'create-projects', 'update-projects', 'destroy-projects'
+        ]); // Full project management, limited user access
 
         $employee = Role::create(['name' => 'Employee']);
-        $employee->givePermissionTo(['view projects']); // Only view projects
+        $employee->givePermissionTo(['show-projects']); // View projects access
 
         // Create users and assign roles
         User::factory()->create([
@@ -66,4 +79,3 @@ class RolesAndPermissionsSeeder extends Seeder
 
     }
 }
-

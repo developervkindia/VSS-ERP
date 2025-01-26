@@ -7,10 +7,12 @@
             object-fit: cover;" />
         </a>
         <a href="index.html" class="logo logo-small">
-            <img src="{{ asset('assets/img/logo-small1.jpeg') }}" alt="Logo"  />
+            <img src="{{ asset('assets/img/logo-small1.jpeg') }}" alt="Logo" />
         </a>
-        {{-- <div class="text-primary h1"  style="margin:-9%"><img src="{{ asset('assets/img/logo.png') }}" alt="Logo" width="100%" height="inherit" /></div> --}}
-        {{-- <a href="index.html" class="logo"><h1 style="
+        {{-- <div class="text-primary h1" style="margin:-9%"><img src="{{ asset('assets/img/logo.png') }}" alt="Logo"
+                width="100%" height="inherit" /></div> --}}
+        {{-- <a href="index.html" class="logo">
+            <h1 style="
             font-family: 'Arial', sans-serif;
             font-size: 2.5rem;
             font-weight: bold;
@@ -23,8 +25,9 @@
             border-radius: 10px;
             /* background: linear-gradient(90deg, #0056b3, #007BFF); */
             box-shadow: 0 4px 6px rgba(0, 123, 255, 0.4);">
-            VSS-ERP
-        </h1></a>
+                VSS-ERP
+            </h1>
+        </a>
         <a href="index.html" class="logo logo-small">
             <h1 style="
             font-family: 'Arial', sans-serif;
@@ -39,8 +42,8 @@
             border-radius: 10px;
             /* background: linear-gradient(90deg, #0056b3, #007BFF); */
             box-shadow: 0 4px 6px rgba(0, 123, 255, 0.4);">
-            V
-        </h1>
+                V
+            </h1>
         </a> --}}
     </div>
 
@@ -88,10 +91,12 @@
                             <a href="#">
                                 <div class="media d-flex">
                                     <span class="avatar avatar-sm flex-shrink-0">
-                                        <img class="avatar-img rounded-circle" alt="User Image" src="assets/img/profiles/avatar-02.jpg" />
+                                        <img class="avatar-img rounded-circle" alt="User Image"
+                                            src="assets/img/profiles/avatar-02.jpg" />
                                     </span>
                                     <div class="media-body flex-grow-1">
-                                        <p class="noti-details"><span class="noti-title">Carlson Tech</span> has approved <span class="noti-title">your estimate</span></p>
+                                        <p class="noti-details"><span class="noti-title">Carlson Tech</span> has
+                                            approved <span class="noti-title">your estimate</span></p>
                                         <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
                                     </div>
                                 </div>
@@ -101,10 +106,13 @@
                             <a href="#">
                                 <div class="media d-flex">
                                     <span class="avatar avatar-sm flex-shrink-0">
-                                        <img class="avatar-img rounded-circle" alt="User Image" src="assets/img/profiles/avatar-11.jpg" />
+                                        <img class="avatar-img rounded-circle" alt="User Image"
+                                            src="assets/img/profiles/avatar-11.jpg" />
                                     </span>
                                     <div class="media-body flex-grow-1">
-                                        <p class="noti-details"><span class="noti-title">International Software Inc</span> has sent you a invoice in the amount of <span class="noti-title">$218</span></p>
+                                        <p class="noti-details"><span class="noti-title">International Software
+                                                Inc</span> has sent you a invoice in the amount of <span
+                                                class="noti-title">$218</span></p>
                                         <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
                                     </div>
                                 </div>
@@ -114,10 +122,12 @@
                             <a href="#">
                                 <div class="media d-flex">
                                     <span class="avatar avatar-sm flex-shrink-0">
-                                        <img class="avatar-img rounded-circle" alt="User Image" src="assets/img/profiles/avatar-17.jpg" />
+                                        <img class="avatar-img rounded-circle" alt="User Image"
+                                            src="assets/img/profiles/avatar-17.jpg" />
                                     </span>
                                     <div class="media-body flex-grow-1">
-                                        <p class="noti-details"><span class="noti-title">John Hendry</span> sent a cancellation request <span class="noti-title">Apple iPhone XR</span></p>
+                                        <p class="noti-details"><span class="noti-title">John Hendry</span> sent a
+                                            cancellation request <span class="noti-title">Apple iPhone XR</span></p>
                                         <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
                                     </div>
                                 </div>
@@ -127,10 +137,12 @@
                             <a href="#">
                                 <div class="media d-flex">
                                     <span class="avatar avatar-sm flex-shrink-0">
-                                        <img class="avatar-img rounded-circle" alt="User Image" src="{{ asset('assets/img/profiles/avatar-13.jpg') }}" />
+                                        <img class="avatar-img rounded-circle" alt="User Image"
+                                            src="{{ asset('assets/img/profiles/avatar-13.jpg') }}" />
                                     </span>
                                     <div class="media-body flex-grow-1">
-                                        <p class="noti-details"><span class="noti-title">Mercury Software Inc</span> added a new product <span class="noti-title">Apple MacBook Pro</span></p>
+                                        <p class="noti-details"><span class="noti-title">Mercury Software Inc</span>
+                                            added a new product <span class="noti-title">Apple MacBook Pro</span></p>
                                         <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
                                     </div>
                                 </div>
@@ -143,7 +155,19 @@
                 </div>
             </div>
         </li>
+        <li>
+            @impersonating($guard = null)
+    <a href="{{ route('impersonate.leave') }}">Leave impersonation</a>
+@endImpersonating
+            {{-- @dd(session('impersonated_user_id')) --}}
+            {{-- @if(session('impersonated_user_id'))
+            <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">You are impersonating a user</span>
+                <a href="{{ route('admin.back') }}" class="btn btn-secondary">Back to Admin</a>
+            </div>
 
+            @endif --}}
+        </li>
         <li class="nav-item zoom-screen me-2">
             <a href="#" class="nav-link header-nav-list">
                 <img src="{{ asset('assets/img/icons/header-icon-04.svg') }}" alt="" />
@@ -153,7 +177,8 @@
         <li class="nav-item dropdown has-arrow new-user-menus">
             <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                 <span class="user-img">
-                    <img class="rounded-circle" src="{{ asset('assets/img/profiles/avatar-01.jpg') }}" width="31" alt="Soeng Souy" />
+                    <img class="rounded-circle" src="{{ asset('assets/img/profiles/avatar-01.jpg') }}" width="31"
+                        alt="Soeng Souy" />
                     <div class="user-text">
                         <h6>{{ auth()->user()->name }}</h6>
                         <p class="text-muted mb-0">Administrator</p>
@@ -163,7 +188,8 @@
             <div class="dropdown-menu">
                 <div class="user-header">
                     <div class="avatar avatar-sm">
-                        <img src="{{ asset('assets/img/profiles/avatar-01.jpg') }}" alt="User Image" class="avatar-img rounded-circle" />
+                        <img src="{{ asset('assets/img/profiles/avatar-01.jpg') }}" alt="User Image"
+                            class="avatar-img rounded-circle" />
                     </div>
                     <div class="user-text">
                         <h6>{{ auth()->user()->name }}</h6>

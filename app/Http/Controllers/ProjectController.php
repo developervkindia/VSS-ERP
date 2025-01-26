@@ -3,14 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class ProjectController extends Controller
+class ProjectController extends Controller implements HasMiddleware
 {
+
+    public static function middleware() {
+        return [
+            new Middleware('permission:show-projects', ['only' => ['index', 'show']]),
+            new Middleware('permission:create-projects', ['only' => ['create', 'store']]),
+            new Middleware('permission:update-projects', ['only' => ['edit', 'update']]),
+            new Middleware('permission:destroy-projects', ['only' => ['destroy']]),
+        ];
+    }
     // Show list of projects
-    public function index()
+    public function index(User $user)
     {
+        // dd(auth()->user()->name);
+        dd($user->hasPermissionTo('show-projects'));
         $projects = Project::latest()->get();
 
         return view('projects.index', compact('projects'));

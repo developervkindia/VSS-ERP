@@ -19,6 +19,12 @@
                 <li class="{{ Request::Segment(1) == 'users' ? 'active' : '' }}">
                     <a href="{{ route('users.index') }}"><i class="fa fa-users"></i> <span>Users</span></a>
                 </li>
+                <li class="{{ Request::Segment(1) == 'roles' ? 'active' : '' }}">
+                    <a href="{{ route('roles.index') }}"><i class="fa fa-users"></i> <span>Roles</span></a>
+                </li>
+                <li class="{{ Request::Segment(1) == 'permissions' ? 'active' : '' }}">
+                    <a href="{{ route('permissions.index') }}"><i class="fa fa-users"></i> <span>Permissions</span></a>
+                </li>
             </ul>
         </div>
     </div>

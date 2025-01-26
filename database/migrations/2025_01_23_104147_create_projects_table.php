@@ -8,32 +8,26 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->timestamp('start_date')->nullable();
-            $table->timestamp('end_date')->nullable();
-            $table->longText('description')->nullable();
-            $table->enum('type', ['public', 'private'])->nullable();
-
-            $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->text('description')->nullable();
+            $table->string('type');
+            $table->string('status');
+             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('projects');
     }

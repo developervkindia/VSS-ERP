@@ -56,24 +56,28 @@ class RolesAndPermissionsSeeder extends Seeder
         User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@vss.com',
+            'phone' => '1234567891',
             'password' => bcrypt('password'), // Default password
         ])->assignRole($admin);
 
         User::factory()->create([
             'name' => 'HR User',
             'email' => 'hr@vss.com',
+            'phone' => '1234567892',
             'password' => bcrypt('password'), // Default password
         ])->assignRole($hr);
 
         User::factory()->create([
             'name' => 'Manager User',
             'email' => 'manager@vss.com',
+            'phone' => '1234567893',
             'password' => bcrypt('password'), // Default password
         ])->assignRole($manager);
 
         User::factory()->create([
             'name' => 'Employee User',
             'email' => 'employee@vss.com',
+            'phone' => '1234567894',
             'password' => bcrypt('password'), // Default password
         ])->assignRole($employee);
 

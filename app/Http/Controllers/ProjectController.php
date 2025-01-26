@@ -5,83 +5,82 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class ProjectController extends Controller implements HasMiddleware
+class ProjectController extends Controller
 {
-
-    public static function middleware() {
-        return [
-            new Middleware('permission:show-projects', ['only' => ['index', 'show']]),
-            new Middleware('permission:create-projects', ['only' => ['create', 'store']]),
-            new Middleware('permission:update-projects', ['only' => ['edit', 'update']]),
-            new Middleware('permission:destroy-projects', ['only' => ['destroy']]),
-        ];
-    }
-    // Show list of projects
-    public function index(User $user)
+    public function index()
     {
-        // dd(auth()->user()->name);
-        dd($user->hasPermissionTo('show-projects'));
-        $projects = Project::latest()->get();
-
-        return view('projects.index', compact('projects'));
+        $title = 'List Projects';
+        $projects = Project::with('user')->paginate(10);
+        return view('projects.index', compact('projects','title'));
     }
 
-    // Show create form
     public function create()
     {
-        return view('projects.create');
+        $title = 'Create Project';
+        $users = User::all();
+        $types = Project::projectTypes();
+        $statuses = Project::projectStatuses();
+        return view('projects.create',compact('title','users','types','statuses'));
     }
 
-    // Store a new project
     public function store(Request $request)
     {
-        $request->validate([
-            'title'       => 'required',
-            'start_date'  => 'nullable|date',
-            'end_date'    => 'nullable|date|after_or_equal:start_date',
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'user_id' => 'required|exists:users,id',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after:start_date',
             'description' => 'nullable',
+            'type' => 'required|in:' . implode(',', array_keys(Project::projectTypes())),
+            'status' => 'required|in:' . implode(',', array_keys(Project::projectStatuses())),
         ]);
 
-        $request['user_id'] = Auth::id();
-        Project::create($request->all());
+        Project::create($validatedData);
 
-        return redirect()->route('projects.index');
+        return redirect()->route('projects.index')->with('success', 'Project created successfully.');
     }
 
-    // Show edit form
-    public function edit($id)
+    public function show(Project $project)
     {
-        $project = Project::find($id);
-
-        return view('projects.create', compact('project'));
+        $title = 'Project Detail';
+        $project->load('user');
+         return view('projects.show', compact('project','title'));
     }
 
-    // Update a project
-    public function update(Request $request, $id)
+
+    public function edit(Project $project)
     {
-        $request->validate([
-            'title'       => 'required',
-            'start_date'  => 'nullable|date',
-            'end_date'    => 'nullable|date|after_or_equal:start_date',
-            'description' => 'nullable',
-        ]);
-
-        $project = Project::find($id);
-        $project->update($request->all());
-
-        return redirect()->route('projects.index');
+        $title = 'Edit Project';
+        $users = User::all();
+        $types = Project::projectTypes();
+        $statuses = Project::projectStatuses();
+        $project->setAttribute('start_date', $project->getRawOriginal('start_date'));
+        $project->setAttribute('end_date', $project->getRawOriginal('end_date'));
+        return view('projects.create', compact('project', 'title', 'users', 'types', 'statuses'));
     }
 
-    // Delete a project
-    public function destroy($id)
+    public function update(Request $request, Project $project)
     {
-        $project = Project::find($id);
+         $validatedData = $request->validate([
+             'title' => 'required|max:255',
+             'user_id' => 'required|exists:users,id',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after:start_date',
+             'description' => 'nullable',
+             'type' => 'required|in:' . implode(',', array_keys(Project::projectTypes())),
+             'status' => 'required|in:' . implode(',', array_keys(Project::projectStatuses())),
+         ]);
+
+        $project->update($validatedData);
+
+        return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
+    }
+
+
+    public function destroy(Project $project)
+    {
         $project->delete();
-
-        return redirect()->route('projects.index');
+        return redirect()->route('projects.index')->with('success', 'Project deleted successfully');
     }
 }

@@ -10,11 +10,14 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "barryvdh/laravel-dompdf": "^3.1",
         "lab404/laravel-impersonate": "^1.7",
         "laravel/breeze": "^2.3",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.6",
+        "maatwebsite/excel": "^3.1",
+        "spatie/laravel-activitylog": "^4.9",
         "spatie/laravel-permission": "^6.10"
     },
     "require-dev": {
@@ -80,6 +83,6 @@
         "url": "https://github.com/developervkindia/module-generator.git"
     }
 ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }

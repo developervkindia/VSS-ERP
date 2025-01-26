@@ -14,14 +14,7 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, hasRoles,Impersonate;
-    protected $table = 'users';
-    public $user;
 
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-        $this->user = Auth::user();
-    }
     /**
      * The attributes that are mass assignable.
      *

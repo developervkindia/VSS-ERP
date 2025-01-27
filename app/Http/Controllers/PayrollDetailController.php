@@ -12,13 +12,24 @@ use Illuminate\Support\Str;
 
 class PayrollDetailController extends Controller
 {
-     public function index()
+    public function index(Request $request)
     {
-         $title = 'List Payroll Details';
-         $payrollDetails = PayrollDetail::with('user')->paginate(10);
-        return view('payroll_details.index', compact('payrollDetails','title'));
-    }
+        $title = 'List Payroll Details';
+         $query = PayrollDetail::with('user');
+        if($request->has('users') && $request->input('users')){
+           $query->whereIn('user_id', $request->input('users'));
+         }
+        if ($request->has('month') && $request->has('year')) {
+             $month = $request->input('month');
+             $year = $request->input('year');
+              $query->whereMonth('pay_date', $month)->whereYear('pay_date', $year);
+         }
 
+
+        $payrollDetails = $query->paginate(10);
+         $users = User::all();
+        return view('payroll_details.index', compact('payrollDetails','title', 'users'));
+    }
 
     public function create()
     {
@@ -122,7 +133,8 @@ class PayrollDetailController extends Controller
      public function exportToPdf(PayrollDetail $payrollDetail)
      {
         $payrollDetail->load('user');
-        $pdf = Pdf::loadView('payroll_details.payslip', compact('payrollDetail'));
+       $logoPath = public_path('assets/img/logo1.jpeg'); //logo from layout file
+       $pdf = Pdf::loadView('payroll_details.payslip', compact('payrollDetail','logoPath'));
         return $pdf->download('payslip.pdf');
 
      }

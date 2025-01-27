@@ -5,14 +5,20 @@ namespace App\Exports;
 use App\Models\PayrollDetail;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
-class PayrollExport implements FromCollection, WithHeadings
+
+class PayrollExport implements FromCollection, WithHeadings, WithStyles, WithColumnWidths
 {
-     public function collection()
+    public function collection()
     {
         return PayrollDetail::with('user')->get()->map(function ($payrollDetail) {
                 return [
-                  'Payslip Number' => $payrollDetail->payslip_number,
                     'Employee Name' => $payrollDetail->user->name,
                     'Pay Date' => $payrollDetail->pay_date,
                    'Pay Period' => $payrollDetail->pay_period,
@@ -39,7 +45,6 @@ class PayrollExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-              'Payslip Number',
               'Employee Name',
             'Pay Date',
            'Pay Period',
@@ -60,6 +65,52 @@ class PayrollExport implements FromCollection, WithHeadings
            'Bank Sort Code',
              'Currency',
 
+        ];
+    }
+    public function styles(Worksheet $sheet)
+    {
+        $sheet->getStyle('1')->getFont()->setBold(true);
+         $sheet->getStyle('1')->getFill()
+        ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+        ->getStartColor()->setRGB('d3d3d3');
+
+           $lastColumn = $sheet->getHighestColumn();
+           $cellRange = 'A1:' . $lastColumn . '1';
+          $sheet->getStyle($cellRange)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+        $cellRange = 'A1:' . $sheet->getHighestColumn() . $sheet->getHighestRow();
+         $sheet->getStyle($cellRange)->applyFromArray([
+        'borders' => [
+            'allBorders' => [
+                'borderStyle' => Border::BORDER_THIN,
+                'color' => ['rgb' => '000000'],
+             ],
+         ],
+        ]);
+    }
+
+      public function columnWidths(): array
+    {
+        return [
+            'A' => 25, // Employee Name
+           'B' => 15, // Pay Date
+           'C' => 15, // Pay Period
+          'D' => 15, // Basic Salary
+            'E' => 15, // Gross Salary
+           'F' => 15, // Total Allowances
+            'G' => 30, // Allowance Breakdown
+            'H' => 15,  //Total Deductions
+            'I' => 30, //Deduction Breakdown
+           'J' => 15, //Total Tax
+           'K' => 30, //Tax Breakdown
+           'L' => 15, // Total Benefits
+            'M' => 30, // Benefit Breakdown
+           'N' => 15, // Net Salary
+          'O' => 20,  // Payment Method
+           'P' => 20, //Bank Name
+           'Q' => 25, // Bank Account Number
+            'R' => 15, // Bank Sort Code
+           'S' => 10, // currency
         ];
     }
 }

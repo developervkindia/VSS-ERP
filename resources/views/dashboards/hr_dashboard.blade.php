@@ -108,7 +108,7 @@
                                         <tbody>
                                             @foreach($leaveRequests as $leaveRequest)
                                                  <tr>
-                                                    <td>{{ $leaveRequest->employee->user->name ?? 'N/A' }}</td>
+                                                    <td>{{ $leaveRequest->user->name ?? 'N/A' }}</td>
                                                      <td>{{ $leaveRequest->leave_type ?? 'N/A' }}</td>
                                                      <td>{{ $leaveRequest->start_date ?? 'N/A' }}</td>
                                                      <td>{{ $leaveRequest->end_date ?? 'N/A' }}</td>

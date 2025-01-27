@@ -19,6 +19,9 @@
 <body>
     <div class="payslip">
         <div class="header">
+              @if(isset($logoPath))
+                 <img src="{{ $logoPath }}" alt="Logo" style="max-height: 60px; margin-bottom:10px;"/>
+              @endif
             <h2>Payslip</h2>
             <p>Payslip Number: {{ $payrollDetail->payslip_number }}</p>
         </div>

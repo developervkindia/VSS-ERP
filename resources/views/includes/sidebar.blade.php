@@ -40,7 +40,12 @@
                  <li class="menu-title">
                     <span>HR Management</span>
                 </li>
-
+                <li class="{{ Request::segment(1) == 'jobs' ? 'active' : '' }}">
+                    <a href="{{ route('jobs.index') }}"><i class="fas fa-user-shield"></i> <span>Job Management</span></a>
+                </li>
+                <li class="{{ Request::segment(1) == 'candidates' ? 'active' : '' }}">
+                    <a href="{{ route('candidates.index') }}"><i class="fas fa-user-shield"></i> <span>Candidates</span></a>
+                </li>
                 <li class="{{ Request::segment(1) == 'performance_evaluations' ? 'active' : '' }}">
                     <a href="{{ route('performance_evaluations.index') }}"><i class="fas fa-clipboard-check"></i> <span>Performance Evaluations</span></a>
                 </li>

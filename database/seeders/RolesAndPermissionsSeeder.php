@@ -31,25 +31,25 @@ class RolesAndPermissionsSeeder extends Seeder
 
 
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::updateOrCreate(['name' => $permission]);
         }
 
         // Create roles and assign permissions
-        $admin = Role::create(['name' => 'Admin']);
+        $admin = Role::updateOrCreate(['name' => 'Admin']);
         $admin->givePermissionTo(Permission::all()); // All permissions
 
-        $hr = Role::create(['name' => 'HR']);
+        $hr = Role::updateOrCreate(['name' => 'HR']);
         $hr->givePermissionTo([
             'show-users', 'create-users', 'update-users', 'destroy-users'
         ]); // Full user management permissions
 
-        $manager = Role::create(['name' => 'Manager']);
+        $manager = Role::updateOrCreate(['name' => 'Manager']);
         $manager->givePermissionTo([
             'show-users',
             'show-projects', 'create-projects', 'update-projects', 'destroy-projects'
         ]); // Full project management, limited user access
 
-        $employee = Role::create(['name' => 'Employee']);
+        $employee = Role::updateOrCreate(['name' => 'Employee']);
         $employee->givePermissionTo(['show-projects']); // View projects access
 
         // Create users and assign roles

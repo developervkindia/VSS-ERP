@@ -29,6 +29,7 @@
          <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
         <div class="main-wrapper">

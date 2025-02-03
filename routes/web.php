@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\JobPositionController;
 use App\Http\Controllers\LeaveRequestController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PayrollDetailController;
 use App\Http\Controllers\PerformanceEvaluationController;
 use App\Http\Controllers\PermissionController;
@@ -22,7 +25,7 @@ Route::resource('users', UserController::class);
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 
 // Route::middleware('auth')->group(function () {
@@ -73,3 +76,21 @@ Route::get('/dashboard/admin', [DashboardController::class, 'adminDashboard'])->
 Route::get('/dashboard/hr', [DashboardController::class, 'hrDashboard'])->name('dashboard.hr');
 Route::get('/dashboard/manager', [DashboardController::class, 'managerDashboard'])->name('dashboard.manager');
 Route::get('/dashboard/employee', [DashboardController::class, 'employeeDashboard'])->name('dashboard.employee');
+Route::resource('jobs', JobPositionController::class);
+  //Add on Web
+  Route::get('job-openings',[JobPositionController::class, 'jobOpenings'])->name('job_openings_page'); //front list route for job-openings using method
+
+  //route specific job using slug if selected by users... this action controller has type hinted value for Model record from available entry based on database id look up... using slug.
+  Route::get('job-openings/{job:slug}',[JobPositionController::class, 'jobDetails'])->name('job_details_page');
+  // added Job:slug mapping and if exists or throws 404 , as well correct single record retrieval on controllers. (can also perform using ID on url also )
+   //added above routes (front facing URLs and other application data) from standard routes related resources management of Admin controllers with `/jobs`. If all goes well, your application can start serving requests without conflicting on URLs, on different parts or functionality..
+   Route::get('/job-apply/{job:slug}', [JobPositionController::class, 'showApplicationForm'])->name('job.apply.form');
+   Route::post('/job-apply/{job:slug}', [JobPositionController::class, 'submitApplication'])->name('job.apply.submit');
+//    Route::middleware(['auth', 'role:hr'])->group(function () { // Use appropriate middleware for HR access
+    Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates.index');
+    Route::post('/candidates/{candidate}/update-status', [CandidateController::class, 'updateStatus'])->name('candidates.updateStatus');
+    Route::post('/candidates/{candidate}/add-note', [CandidateController::class, 'addNote'])->name('candidates.addNote');
+    Route::post('/candidates/{candidate}/update-rating', [CandidateController::class, 'updateRating'])->name('candidates.updateRating');
+// });
+Route::post('/notifications/{notification}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
+Route::get('/notifications/clear-all', [NotificationController::class, 'clearAll'])->name('notifications.clearAll');

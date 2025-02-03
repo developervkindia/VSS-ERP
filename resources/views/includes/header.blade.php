@@ -1,50 +1,14 @@
 <div class="header">
     <div class="header-left">
-        <a href="index.html" class="logo">
+        <a href="{{ route('dashboard') }}" class="logo">
             <img src="{{ asset('assets/img/logo1.jpeg') }}" alt="Logo" style="max-height: 40px;
             width: 100%;
             aspect-ratio: 5;
             object-fit: cover;" />
         </a>
-        <a href="index.html" class="logo logo-small">
+        <a href="{{ route('dashboard') }}" class="logo logo-small">
             <img src="{{ asset('assets/img/logo-small1.jpeg') }}" alt="Logo" />
         </a>
-        {{-- <div class="text-primary h1" style="margin:-9%"><img src="{{ asset('assets/img/logo.png') }}" alt="Logo"
-                width="100%" height="inherit" /></div> --}}
-        {{-- <a href="index.html" class="logo">
-            <h1 style="
-            font-family: 'Arial', sans-serif;
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #007BFF; /* Primary blue */
-            text-shadow: 1px 7px 5px rgba(7, 0, 259, 0.4);
-            /* letter-spacing: 2px; */
-            display: inline-block;
-            /* padding: 0.5rem 1rem; */
-            /* border: 2px solid #007BFF; */
-            border-radius: 10px;
-            /* background: linear-gradient(90deg, #0056b3, #007BFF); */
-            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.4);">
-                VSS-ERP
-            </h1>
-        </a>
-        <a href="index.html" class="logo logo-small">
-            <h1 style="
-            font-family: 'Arial', sans-serif;
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #007BFF; /* Primary blue */
-            text-shadow: 1px 7px 5px rgba(7, 0, 259, 0.4);
-            /* letter-spacing: 2px; */
-            display: inline-block;
-            /* padding: 0.5rem 1rem; */
-            /* border: 2px solid #007BFF; */
-            border-radius: 10px;
-            /* background: linear-gradient(90deg, #0056b3, #007BFF); */
-            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.4);">
-                V
-            </h1>
-        </a> --}}
     </div>
 
     <div class="menu-toggle">
@@ -83,71 +47,29 @@
             <div class="dropdown-menu notifications">
                 <div class="topnav-dropdown-header">
                     <span class="notification-title">Notifications</span>
-                    <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                    <a href="{{ route('notifications.clearAll') }}" class="clear-noti"> Clear All </a>
                 </div>
                 <div class="noti-content">
                     <ul class="notification-list">
+                        @forelse(auth()->user()->unreadNotifications as $notification)
                         <li class="notification-message">
-                            <a href="#">
+                            <a href="{{ route('candidates.index') }}" class="mark-notification-read" data-notification-id="{{ $notification->id }}">
                                 <div class="media d-flex">
                                     <span class="avatar avatar-sm flex-shrink-0">
-                                        <img class="avatar-img rounded-circle" alt="User Image"
-                                            src="assets/img/profiles/avatar-02.jpg" />
+                                        <img class="avatar-img rounded-circle" alt="User Image" src="{{ asset('assets/img/profiles/avatar-02.jpg') }}">
                                     </span>
                                     <div class="media-body flex-grow-1">
-                                        <p class="noti-details"><span class="noti-title">Carlson Tech</span> has
-                                            approved <span class="noti-title">your estimate</span></p>
-                                        <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
+                                        <p class="noti-details"><span class="noti-title">New Application</span>:
+                                            {{ $notification->data['message'] }}
+                                        </p>
+                                        <p class="noti-time"><span class="notification-time">{{ $notification->created_at->diffForHumans() }}</span></p>
                                     </div>
                                 </div>
                             </a>
-                        </li>
-                        <li class="notification-message">
-                            <a href="#">
-                                <div class="media d-flex">
-                                    <span class="avatar avatar-sm flex-shrink-0">
-                                        <img class="avatar-img rounded-circle" alt="User Image"
-                                            src="assets/img/profiles/avatar-11.jpg" />
-                                    </span>
-                                    <div class="media-body flex-grow-1">
-                                        <p class="noti-details"><span class="noti-title">International Software
-                                                Inc</span> has sent you a invoice in the amount of <span
-                                                class="noti-title">$218</span></p>
-                                        <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="notification-message">
-                            <a href="#">
-                                <div class="media d-flex">
-                                    <span class="avatar avatar-sm flex-shrink-0">
-                                        <img class="avatar-img rounded-circle" alt="User Image"
-                                            src="assets/img/profiles/avatar-17.jpg" />
-                                    </span>
-                                    <div class="media-body flex-grow-1">
-                                        <p class="noti-details"><span class="noti-title">John Hendry</span> sent a
-                                            cancellation request <span class="noti-title">Apple iPhone XR</span></p>
-                                        <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="notification-message">
-                            <a href="#">
-                                <div class="media d-flex">
-                                    <span class="avatar avatar-sm flex-shrink-0">
-                                        <img class="avatar-img rounded-circle" alt="User Image"
-                                            src="{{ asset('assets/img/profiles/avatar-13.jpg') }}" />
-                                    </span>
-                                    <div class="media-body flex-grow-1">
-                                        <p class="noti-details"><span class="noti-title">Mercury Software Inc</span>
-                                            added a new product <span class="noti-title">Apple MacBook Pro</span></p>
-                                        <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+                         </li>
+                        @empty
+                        <li class="notification-message"><a href="#">No new notifications</a></li>
+                        @endforelse
                     </ul>
                 </div>
                 <div class="topnav-dropdown-footer">
@@ -155,18 +77,10 @@
                 </div>
             </div>
         </li>
-        <li>
+  <li>
             @impersonating($guard = null)
     <a href="{{ route('impersonate.leave') }}">Leave impersonation</a>
 @endImpersonating
-            {{-- @dd(session('impersonated_user_id')) --}}
-            {{-- @if(session('impersonated_user_id'))
-            <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative" role="alert">
-                <span class="block sm:inline">You are impersonating a user</span>
-                <a href="{{ route('admin.back') }}" class="btn btn-secondary">Back to Admin</a>
-            </div>
-
-            @endif --}}
         </li>
         <li class="nav-item zoom-screen me-2">
             <a href="#" class="nav-link header-nav-list">
@@ -207,3 +121,28 @@
         </li>
     </ul>
 </div>
+<script src="{{ asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+<script>
+$(document).ready(function() {
+    $('.mark-notification-read').on('click', function(e) {
+        e.preventDefault();
+        let notificationId = $(this).data('notification-id');
+        let link = $(this).attr('href')
+
+        $.ajax({
+            url: `/notifications/${notificationId}/mark-as-read`,
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                 window.location.href = link; // or do nothing if no redirect
+            },
+               error: function(error) {
+                   console.error("An error occurred:", error);
+              }
+        });
+    });
+})
+
+</script>
